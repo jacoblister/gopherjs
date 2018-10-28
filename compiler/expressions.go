@@ -1198,7 +1198,8 @@ func (c *funcContext) fixNumber(value *expression, basic *types.Basic) *expressi
 	case types.Uint32, types.Uint, types.Uintptr:
 		return c.formatParenExpr("%s >>> 0", value)
 	case types.Float32:
-		return c.formatExpr("$fround(%s)", value)
+		return value
+		// return c.formatExpr("$fround(%s)", value)
 	case types.Float64:
 		return value
 	default:
