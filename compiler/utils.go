@@ -619,18 +619,19 @@ func removeWhitespace(b []byte, minify bool) []byte {
 }
 
 func rangeCheck(pattern string, constantIndex, array bool) string {
-	if constantIndex && array {
-		return pattern
-	}
-	lengthProp := "$length"
-	if array {
-		lengthProp = "length"
-	}
-	check := "%2f >= %1e." + lengthProp
-	if !constantIndex {
-		check = "(%2f < 0 || " + check + ")"
-	}
-	return "(" + check + ` ? ($throwRuntimeError("index out of range"), undefined) : ` + pattern + ")"
+	return pattern
+	// if constantIndex && array {
+	// 	return pattern
+	// }
+	// lengthProp := "$length"
+	// if array {
+	// 	lengthProp = "length"
+	// }
+	// check := "%2f >= %1e." + lengthProp
+	// if !constantIndex {
+	// 	check = "(%2f < 0 || " + check + ")"
+	// }
+	// return "(" + check + ` ? ($throwRuntimeError("index out of range"), undefined) : ` + pattern + ")"
 }
 
 func endsWithReturn(stmts []ast.Stmt) bool {
