@@ -313,7 +313,19 @@ var $internalize = function(v, t, recv) {
       return $internalize(v, t.elem);
     }
   case $kindSlice:
-    return new t($mapArray(v, function(e) { return $internalize(e, t.elem); }));
+    switch (v.constructor) {
+      case Int8Array:
+      case Int16Array:
+      case Int32Array:
+      case Uint8Array:
+      case Uint16Array:
+      case Uint32Array:
+      case Float32Array:
+      case Float64Array:
+        return new t(v);
+      default:
+        return new t($mapArray(v, function(e) { return $internalize(e, t.elem); }));
+    }
   case $kindString:
     v = String(v);
     if ($isASCII(v)) {
